@@ -7,7 +7,7 @@ import myProbotApp from "../src";
 import { Probot, ProbotOctokit } from "probot";
 // Requiring our fixtures
 import payload from "./fixtures/issues.opened.json";
-const issueCreatedBody = { body: "Thanks for opening this issue!" };
+const issueCreatedBody = { body: "Thanks for opening this issue! An admin will response to this request later." };
 const fs = require("fs");
 const path = require("path");
 

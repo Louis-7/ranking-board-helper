@@ -1,0 +1,22 @@
+name: main
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: install dependencies
+        run: npm install
+
+      - name: unit tests
+        run: npm run test
+
+      - name: integration tests
+        run: |
+          npm start
+          curl -I -L -s http://localhost:3000 | grep -q "200 OK" && echo "Website is alive" || echo "Website is not alive"
