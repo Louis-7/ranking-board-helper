@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: install dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: unit tests
+      - name: Run unit tests
         run: npm run test
 
-      - name: integration tests
+      - name: Run integration tests
         run: |
-          npm start
+          npm start > /dev/null 2>&1 &
           curl -I -L -s http://localhost:3000 | grep -q "200 OK" && echo "Website is alive" || echo "Website is not alive"
