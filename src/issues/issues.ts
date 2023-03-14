@@ -1,12 +1,14 @@
 import { Context } from "probot";
-export class Issue {
-  context: Context
 
-  constructor(context: Context) {
+export type IssueContext = Context<'issues.opened' | 'issue_comment.created'>;
+export class Issue {
+  context: IssueContext
+
+  constructor(context: IssueContext) {
     this.context = context;
   }
 
-  async comment(comment:string, context?:Context) {
+  async comment(comment:string, context?: IssueContext) {
     if (context == null) {
       context = this.context
     }

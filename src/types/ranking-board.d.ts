@@ -1,8 +1,16 @@
 declare module "RankingBoard" {
-  export type Event = {
+  export type EventObject = {
     time: Date;
-    from: string;
-    to: string;
-    points: Number;
+    sender: string;
+    receiver: string;
+    points: number;
+    comment: string;
+    type: EventType
+  }
+
+  export enum EventType {
+    innovation,
+    thanks,
+    other = 1000,
   }
 }
