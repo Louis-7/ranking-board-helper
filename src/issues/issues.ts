@@ -8,7 +8,7 @@ export class Issue {
     this.context = context;
   }
 
-  async comment(comment:string, context?: IssueContext) {
+  async comment(comment: string, context?: IssueContext) {
     if (context == null) {
       context = this.context
     }

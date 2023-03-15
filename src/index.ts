@@ -9,7 +9,7 @@ export = (app: Probot) => {
     await issue.comment("Thanks for opening this issue! An admin will response to this request later.");
   });
 
-  app.on('issue_comment.created',async (context: Context<'issue_comment.created'>) => {
+  app.on('issue_comment.created', async (context: Context<'issue_comment.created'>) => {
     try {
       if (context.payload.sender?.login !== 'Louis-7') return;
 

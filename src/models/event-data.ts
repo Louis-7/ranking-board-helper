@@ -1,4 +1,4 @@
-import {EventObject, EventType} from "../types/ranking-board"
+import { EventObject, EventType } from "../types/ranking-board"
 
 export class EventData {
   time: Date;
@@ -8,7 +8,7 @@ export class EventData {
   comment: string;
   type: EventType;
 
-  constructor (eo: EventObject) {
+  constructor(eo: EventObject) {
     this.time = eo.time;
     this.sender = eo.sender;
     this.receiver = eo.receiver;
