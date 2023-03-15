@@ -1,5 +1,7 @@
 # protagonist-bot
 
+[![main](https://github.com/Louis-7/ranking-board-helper/actions/workflows/main.yml/badge.svg)](https://github.com/Louis-7/ranking-board-helper/actions/workflows/main.yml)
+
 > A GitHub App built with [Probot](https://github.com/probot/probot) that A helper bot for ranking board
 
 ## Setup
