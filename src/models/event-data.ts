@@ -1,30 +1,53 @@
-import { EventObject, EventType } from "../types/ranking-board"
+import { OctokitResponse } from "@octokit/types";
+import { Context } from "probot";
+import { Repo } from "../repos/repo";
+import { EventDB, EventObject } from "../types/ranking-board"
 
 export class EventData {
-  time: Date;
-  sender: string;
-  receiver: string;
-  points: number;
-  comment: string;
-  type: EventType;
+  context: Context;
+  db: EventDB;
 
-  constructor(eo: EventObject) {
-    this.time = eo.time;
-    this.sender = eo.sender;
-    this.receiver = eo.receiver;
-    this.points = eo.points;
-    this.comment = eo.comment;
-    this.type = eo.type;
+  constructor(context: Context) {
+    this.context = context;
+    this.db = { ranking: [] };
   }
 
-  save() {
+  async load(context?: Context) {
+    if (context == null) {
+      context = this.context
+    }
+
+    const repo = new Repo(context as any);
+    const dataFilePath = 'data/ranking.json';
+
+    let contentResponse: OctokitResponse<any, number> = await repo.getContent(dataFilePath)
+    let buffer = Buffer.from(contentResponse.data.content, 'base64');
+    let data = buffer.toString('ascii');
+
+    this.db = JSON.parse(data);
+
+    console.log('db loaded', this.db);
+  }
+
+  async save(eo: EventObject, context?: Context) {
+    if (context == null) {
+      context = this.context
+    }
+
+    this.add(eo);
+
     // save event object to json data.
-    console.log('time: ', this.time);
-    console.log('sender: ', this.sender);
-    console.log('receiver: ', this.receiver);
-    console.log('points: ', this.points);
-    console.log('comment: ', this.comment);
-    console.log('type: ', this.type);
+    console.log('time: ', eo.time);
+    console.log('sender: ', eo.sender);
+    console.log('receiver: ', eo.receiver);
+    console.log('points: ', eo.points);
+    console.log('comment: ', eo.comment);
+    console.log('type: ', eo.type);
     console.log('will save eo to data.json');
+    console.log('>>>>> db is looks like:', this.db);
+  }
+
+  private add(eo: EventObject) {
+    this.db.ranking.push(eo);
   }
 }

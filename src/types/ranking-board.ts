@@ -1,3 +1,7 @@
+export type EventDB = {
+  ranking: EventObject[];
+}
+
 export type EventObject = {
   time: Date;
   sender: string;

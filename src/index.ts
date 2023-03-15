@@ -13,12 +13,14 @@ export = (app: Probot) => {
     try {
       if (context.payload.sender?.login !== 'Louis-7') return;
 
-      let userCommand = context.payload.comment.body;
+      const userCommand = context.payload.comment.body;
       const commandAnalyzer = new CommandAnalyzer(userCommand);
-      let eventObject = commandAnalyzer.toEvent(context as any);
-      let event = new EventData(eventObject);
 
-      event.save();
+      const eventObject = commandAnalyzer.toEvent(context as any);
+      const event = new EventData(context as any);
+
+      await event.load();
+      await event.save(eventObject);
     } catch (e: any) {
       const issue = new Issue(context as any);
       await issue.comment(e.message);
