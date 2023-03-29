@@ -2,7 +2,7 @@ import { Context } from "probot";
 
 export type IssueContext = Context<'issues.opened' | 'issue_comment.created'>;
 export class Issue {
-  context: IssueContext
+  context: IssueContext;
 
   constructor(context: IssueContext) {
     this.context = context;
@@ -10,7 +10,7 @@ export class Issue {
 
   async comment(comment: string, context?: IssueContext) {
     if (context == null) {
-      context = this.context
+      context = this.context;
     }
 
     const issueComment = context.issue({

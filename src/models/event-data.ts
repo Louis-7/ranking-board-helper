@@ -14,18 +14,18 @@ export class EventData {
     this.dataFilePath = process.env.DATA_FILE_PATH || '';
 
     if (this.dataFilePath == null) {
-      throw new Error('DATA_FILE_PATH is missing in the environment variable.')
+      throw new Error('DATA_FILE_PATH is missing in the environment variable.');
     }
   }
 
   async load(context?: Context) {
     if (context == null) {
-      context = this.context
+      context = this.context;
     }
 
     const repo = new Repo(context as any);
 
-    let contentResponse: OctokitResponse<any, number> = await repo.getContent(this.dataFilePath)
+    let contentResponse: OctokitResponse<any, number> = await repo.getContent(this.dataFilePath);
     let buffer = Buffer.from(contentResponse.data.content, 'base64');
     let data = buffer.toString('utf-8');
 
@@ -36,7 +36,7 @@ export class EventData {
 
   async save(eo: EventObject, context?: Context) {
     if (context == null) {
-      context = this.context
+      context = this.context;
     }
 
     this.add(eo);
@@ -58,7 +58,7 @@ export class EventData {
 
   async sync(message: string, branch: string = 'main', context?: Context) {
     if (context == null) {
-      context = this.context
+      context = this.context;
     }
 
     const content = JSON.stringify(this.db);

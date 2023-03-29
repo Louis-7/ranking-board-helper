@@ -20,7 +20,7 @@ export class Repo {
         owner: process.env.DATA_REPO_OWNER || '',
         repo: process.env.DATA_REPO || '',
         path: filepath,
-      })
+      });
   }
 
   async getRef(branch: string, context?: RepoContext): Promise<OctokitResponse<any, number>> {
