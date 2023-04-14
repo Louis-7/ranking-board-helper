@@ -11,7 +11,7 @@ export = (app: Probot) => {
 
   app.on('issue_comment.created', async (context: Context<'issue_comment.created'>) => {
     try {
-      if (context.payload.sender?.login !== 'Louis-7') return;
+      // if (context.payload.sender?.login !== 'Louis-7') return;
 
       const userCommand = context.payload.comment.body;
       const commandAnalyzer = new CommandAnalyzer(userCommand);
